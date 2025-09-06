@@ -1,0 +1,365 @@
+---
+// Courses.astro
+const courses = [
+  {
+    id: 1,
+    imageUrl: "/course-imgs/image1.png",
+    title: "Learn spanish / 学习西班牙语",
+    description:
+      "In this course you are going to learn all the basics about Spanish using Chinese language. 你会会学习收到西班牙语学习领域，课程，学习进度，为美和西班牙文文化的学文化。¡Vamos a empezar! Course co...",
+    date: "2020-06-07",
+    location: "",
+    bloggerLabel: "BT",
+    website: "ixibanyayu.com",
+    travelLabel: "旅游",
+  },
+  {
+    id: 2,
+    imageUrl: "/course-imgs/image2.png",
+    title: "Open Source, the best tools.",
+    description:
+      "Open source is a term denoting that a product permits its users to use its source code, design documents, or content. It most commonly refers to the open-s...",
+    date: "2019-07-22",
+    location: "Jakarta, Indonesia",
+    bloggerLabel: "BT",
+    website: "",
+    travelLabel: "",
+  },
+  {
+    id: 3,
+    imageUrl: "/course-imgs/image3.png",
+    title: "Blogging, the ultimate course.",
+    description:
+      "A blog is a discussion or informational website published on the World Wide Web consisting of discrete, often informal diary-style text entries (posts). Post...",
+    date: "2019-07-22",
+    location: "Delhi, India",
+    bloggerLabel: "BT",
+    website: "",
+    travelLabel: "",
+  },
+  {
+    id: 4,
+    imageUrl: "/course-imgs/image4.png",
+    title: "Advanced Web Development",
+    description:
+      "Master modern web development with the latest frameworks and technologies. Learn React, Node.js, and build full-stack applications from scratch...",
+    date: "2024-03-15",
+    location: "Singapore",
+    bloggerLabel: "BT",
+    website: "",
+    travelLabel: "",
+  },
+  {
+    id: 5,
+    imageUrl: "/course-imgs/image5.png",
+    title: "Digital Marketing Mastery",
+    description:
+      "Comprehensive course covering SEO, social media marketing, content creation, and analytics. Build your digital presence and grow your audience...",
+    date: "2024-01-20",
+    location: "Tokyo, Japan",
+    bloggerLabel: "BT",
+    website: "",
+    travelLabel: "",
+  },
+  {
+    id: 6,
+    imageUrl: "/course-imgs/image6.png",
+    title: "Data Science & Analytics",
+    description:
+      "Learn Python, R, machine learning, and data visualization. Transform raw data into meaningful insights and make data-driven decisions...",
+    date: "2024-02-10",
+    location: "London, UK",
+    bloggerLabel: "BT",
+    website: "",
+    travelLabel: "",
+  },
+];
+---
+
+<section class="courses-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Courses</h2>
+      <div class="underline"></div>
+    </div>
+
+    <div class="courses-grid">
+      {
+        courses.map((course) => (
+          <article class="course-card">
+            <div class="card-image">
+              <img src={course.imageUrl} alt={course.title} />
+              <div class="overlay-content">
+                {course.website && (
+                  <>
+                    <div class="heart-icon">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                      </svg>
+                    </div>
+                    <div class="website-text">{course.website}</div>
+                  </>
+                )}
+                {course.travelLabel && (
+                  <div class="travel-label">{course.travelLabel}</div>
+                )}
+              </div>
+            </div>
+
+            <div class="card-content">
+              <div class="blogger-badge">{course.bloggerLabel}</div>
+
+              <h3 class="card-title">{course.title}</h3>
+
+              <p class="card-description">{course.description}</p>
+
+              <div class="card-footer">
+                {course.location && (
+                  <div class="location">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    <span>{course.location}</span>
+                  </div>
+                )}
+                <time class="card-date">{course.date}</time>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .courses-section {
+    padding: 4rem 2rem;
+    background-color: #f8f9fa;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+  }
+
+  .underline {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #ffc107, #ff9800);
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+  }
+
+  .course-card {
+    width: 100%;
+    max-width: 350px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+  }
+
+  .course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .course-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  .overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 188, 212, 0.8),
+      rgba(38, 198, 218, 0.8)
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .course-card:hover .overlay-content {
+    opacity: 1;
+  }
+
+  .heart-icon {
+    align-self: flex-start;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+  }
+
+  .heart-icon svg {
+    width: 18px;
+    height: 18px;
+    color: #ff4757;
+  }
+
+  .website-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    margin: auto 0;
+  }
+
+  .travel-label {
+    align-self: flex-end;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .blogger-badge {
+    position: absolute;
+    top: -15px;
+    left: 1.5rem;
+    background: #ff6f00;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(255, 111, 0, 0.3);
+  }
+
+  .card-title {
+    margin: 1.2rem 0 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+  }
+
+  .card-description {
+    margin: 0 0 1.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #666;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .location {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #999;
+    font-size: 0.8rem;
+  }
+
+  .location svg {
+    color: #ffc107;
+  }
+
+  .card-date {
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  @media (max-width: 768px) {
+    .courses-section {
+      padding: 3rem 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+    }
+
+    .courses-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .course-card {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .courses-section {
+      padding: 2rem 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+  }
+</style>

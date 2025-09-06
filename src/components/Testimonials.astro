@@ -1,0 +1,388 @@
+---
+// Testimonials.astro
+const testimonials = [
+  {
+    id: 1,
+    imageUrl: "/testimonials-imgs/image1.png",
+    name: "Ana Sukarno",
+    location: "Surabaya, Surabaya City, East Java, Indonesia",
+    quote:
+      "LMS Education has lots of courses and lessons for a very fair price. I can't recommend them enough...",
+  },
+  {
+    id: 2,
+    imageUrl: "/testimonials-imgs/image2.png",
+    name: "Maria Rodriguez",
+    location: "Barcelona, Catalonia, Spain",
+    quote:
+      "The quality of education and support from instructors is outstanding. I've learned more than I expected and gained practical skills that I use daily in my work...",
+  },
+  {
+    id: 3,
+    imageUrl: "/testimonials-imgs/image3.png",
+    name: "David Chen",
+    location: "Singapore, Central Region, Singapore",
+    quote:
+      "Excellent platform with comprehensive courses. The interactive learning approach and real-world projects helped me advance my career significantly...",
+  },
+];
+---
+
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Testimonials</h2>
+    </div>
+
+    <div class="testimonials-slider">
+      <button class="nav-btn prev-btn" aria-label="Previous testimonial">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+      </button>
+
+      <div class="testimonials-container">
+        <div class="testimonials-track">
+          {
+            testimonials.map((testimonial, index) => (
+              <div class="testimonial-card" data-index={index}>
+                <div class="avatar-container">
+                  <img
+                    src={testimonial.imageUrl}
+                    alt={testimonial.name}
+                    class="avatar"
+                  />
+                </div>
+                <h3 class="testimonial-name">{testimonial.name}</h3>
+                <p class="testimonial-quote">"{testimonial.quote}"</p>
+                <div class="testimonial-location">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="location-icon"
+                  >
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                  </svg>
+                  <span>{testimonial.location}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <button class="nav-btn next-btn" aria-label="Next testimonial">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="dots-indicator">
+      {
+        testimonials.map((_, index) => (
+          <button
+            class="dot"
+            data-index={index}
+            aria-label={`Go to testimonial ${index + 1}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-section {
+    padding: 4rem 2rem;
+    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .testimonials-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .nav-btn {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+  }
+
+  .nav-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.1);
+    color: #333;
+  }
+
+  .nav-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .testimonials-container {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 15px;
+  }
+
+  .testimonials-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 300%;
+  }
+
+  .testimonial-card {
+    flex: 0 0 33.333%;
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    margin: 0 1rem;
+  }
+
+  .avatar-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+  }
+
+  .testimonial-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #00bcd4;
+    margin: 0 0 1rem 0;
+  }
+
+  .testimonial-quote {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin: 0 0 1.5rem 0;
+    font-style: italic;
+  }
+
+  .testimonial-location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .location-icon {
+    width: 16px;
+    height: 16px;
+    color: #ffc107;
+  }
+
+  .dots-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: #00bcd4;
+    transform: scale(1.2);
+  }
+
+  .dot:hover {
+    background: #bbb;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-section {
+      padding: 3rem 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+    }
+
+    .testimonials-slider {
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .testimonial-card {
+      padding: 1.5rem;
+      margin: 0;
+    }
+
+    .avatar-container {
+      width: 120px;
+      height: 120px;
+    }
+
+    .testimonial-name {
+      font-size: 1.2rem;
+    }
+
+    .testimonial-quote {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .testimonials-slider {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      display: none;
+    }
+
+    .testimonials-track {
+      width: 100%;
+    }
+
+    .testimonial-card {
+      flex: 0 0 100%;
+      margin: 0;
+    }
+  }
+</style>
+
+<script>
+  // Simple JavaScript slider without TypeScript classes
+  let currentIndex = 0;
+  const totalSlides = 3;
+
+  function initTestimonialsSlider() {
+    const track = document.querySelector(".testimonials-track") as HTMLElement;
+    const dots = document.querySelectorAll(".dot");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+
+    if (!track) return;
+
+    function updateSlider() {
+      const translateX = -currentIndex * 33.333;
+      track.style.transform = `translateX(${translateX}%)`;
+    }
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlider();
+      updateDots();
+    }
+
+    function previousSlide() {
+      currentIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+      updateSlider();
+      updateDots();
+    }
+
+    function goToSlide(index: number) {
+      currentIndex = index;
+      updateSlider();
+      updateDots();
+    }
+
+    // Set initial state
+    updateSlider();
+    updateDots();
+
+    // Add event listeners
+    prevBtn?.addEventListener("click", previousSlide);
+    nextBtn?.addEventListener("click", nextSlide);
+
+    // Add dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => goToSlide(index));
+    });
+
+    // Auto-play slider
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+  }
+
+  // Initialize slider when DOM is ready
+  if (typeof window !== "undefined") {
+    document.addEventListener("DOMContentLoaded", initTestimonialsSlider);
+  }
+</script>

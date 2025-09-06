@@ -1,0 +1,342 @@
+---
+// SearchBlog.astro
+export interface Props {
+  backgroundImage?: string;
+  title?: string;
+  placeholder?: string;
+}
+
+const {
+  backgroundImage = "/library-blue.jpg",
+  title = "Search This Blog",
+  placeholder = "Enter search terms...",
+} = Astro.props;
+---
+
+<section class="search-blog-section" id="search-blog">
+  <div class="parallax-bg" style={`background-image: url(${backgroundImage})`}>
+  </div>
+  <div class="overlay"></div>
+
+  <div class="container">
+    <div class="search-content">
+      <h2 class="search-title">{title}</h2>
+      <div class="underline"></div>
+
+      <form class="search-form" role="search">
+        <div class="search-input-container">
+          <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input
+            type="search"
+            class="search-input"
+            placeholder={placeholder}
+            aria-label="Search blog posts"
+          />
+          <button type="submit" class="search-button">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .search-blog-section {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+  }
+
+  .parallax-bg {
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 120%;
+    height: 140%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    will-change: transform;
+    z-index: 0;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(52, 172, 224, 0.8),
+      rgba(64, 196, 255, 0.7)
+    );
+    z-index: 1;
+    opacity: 0.1;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+  }
+
+  .search-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
+    color: white;
+  }
+
+  .search-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .underline {
+    width: 80px;
+    height: 3px;
+    background: white;
+    margin: 0 auto 3rem auto;
+    border-radius: 2px;
+  }
+
+  .search-form {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .search-input-container {
+    display: flex;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .search-input-container:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #999;
+    z-index: 3;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 1rem 1rem 1rem 3rem;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    background: transparent;
+    color: #333;
+  }
+
+  .search-input::placeholder {
+    color: #999;
+  }
+
+  .search-button {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #34ace0, #40c4ff);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .search-button:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+  }
+
+  .search-button:active {
+    transform: scale(0.98);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .search-title {
+      font-size: 2rem;
+    }
+
+    .search-input-container {
+      flex-direction: column;
+      border-radius: 15px;
+    }
+
+    .search-icon {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      margin: 1rem auto 0 auto;
+      display: block;
+    }
+
+    .search-input {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .search-button {
+      border-radius: 0 0 15px 15px;
+      padding: 1.2rem;
+    }
+
+    .latest-posts-title {
+      font-size: 1.5rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-title {
+      font-size: 1.8rem;
+    }
+
+    .latest-posts-title {
+      font-size: 1.3rem;
+    }
+
+    .search-content {
+      min-height: 40vh;
+    }
+  }
+
+  /* Disable parallax on mobile for better performance */
+  @media (max-width: 768px) {
+    .parallax-bg {
+      background-attachment: scroll;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initParallaxEffect() {
+    const searchSection = document.getElementById("search-blog");
+    const parallaxBg = document.querySelector(".parallax-bg") as HTMLElement;
+
+    if (!searchSection || !parallaxBg) return;
+
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    function handleScroll() {
+      if (!searchSection || !parallaxBg) return;
+
+      const rect = searchSection.getBoundingClientRect();
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.3;
+
+      // Only apply parallax when section is in viewport
+      if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+        parallaxBg.style.transform = `translate3d(0, ${rate}px, 0)`;
+      }
+    }
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    function requestScrollUpdate() {
+      if (!ticking) {
+        requestAnimationFrame(handleScroll);
+        ticking = true;
+        setTimeout(() => {
+          ticking = false;
+        }, 16);
+      }
+    }
+
+    // Add scroll listener
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+
+    // Initial call
+    handleScroll();
+  }
+
+  function initSearchForm() {
+    const searchForm = document.querySelector(
+      ".search-form"
+    ) as HTMLFormElement;
+    const searchInput = document.querySelector(
+      ".search-input"
+    ) as HTMLInputElement;
+
+    if (!searchForm || !searchInput) return;
+
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm) {
+        // You can customize this to integrate with your blog search functionality
+        console.log("Searching for:", searchTerm);
+
+        // Example: redirect to search results page
+        // window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
+
+        // Or trigger a custom search event
+        window.dispatchEvent(
+          new CustomEvent("blogSearch", {
+            detail: { searchTerm },
+          })
+        );
+      }
+    });
+
+    // Add search suggestions or auto-complete here if needed
+    searchInput.addEventListener("input", (e) => {
+      const value = (e.target as HTMLInputElement).value;
+      // Implement search suggestions logic here
+    });
+  }
+
+  // Initialize everything when DOM is ready
+  if (typeof window !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initParallaxEffect();
+      initSearchForm();
+    });
+  }
+</script>

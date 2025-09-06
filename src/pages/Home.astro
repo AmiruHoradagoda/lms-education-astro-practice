@@ -1,0 +1,33 @@
+---
+import Campus from "../components/Campus.astro";
+import ContactUs from "../components/ContactUs.astro";
+import Course from "../components/Course.astro";
+import Hero from "../components/Hero.astro";
+import LatestBlogPosts from "../components/LatestBlogPosts.astro";
+import SearchBlog from "../components/SearchBlog.astro";
+import Sections from "../components/Sections.astro";
+import Selection from "../components/Selection.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="container">
+    <Hero />
+    <Selection />
+    <Course />
+    <Sections />
+    <Testimonials />
+    <SearchBlog />
+    <LatestBlogPosts />
+    <ContactUs />
+    <Campus />
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 100vw;
+    overflow: hidden;
+  }
+</style>
